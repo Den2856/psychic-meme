@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Яндекс практикум</title>
+
+    <link rel="stylesheet" href="../public/static/css/blog.css">
+    
+    <script src="./static/js/app.js" type="module" defer></script>
+</head>
+<body>
+    <header class="hero">
+        <video id="heroVideo" class="hero__media" autoplay loop muted playsinline poster="./media/image/hero.png"></video>
+
+        <img id="heroFallback" class="hero__media hero__media--fallback" src="./media/image/hero.png" alt="" />
+
+        <div class="hero__content">
+            <img src="./static/icons/logo.svg" alt="Яндекс Практикум" class="logo" />
+            <div class="hero__text">
+                <h1 class="hero__title">
+                    <p class="hero__title__line hero__title__line--1">Студия</p>
+                    <p class="hero__title__line hero__title__line--2">цифровых</p>
+                    <p class="hero__title__line hero__title__line--3">поделок</p>
+                </h1>
+                <p class="subtitle">
+                    Сгенерируйте идею для подарка близким своими руками.
+                    Как в детстве, только вместо пластилина и ваты — нейросети и онлайн-сервисы.
+                </p>
+            </div>    
+            <a href="#next" class="scroll-down" id="scrollBtn">
+                <img src="./static/icons/down.svg" alt="Вниз" />
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section id="next" class="generator">
+            <h2 class="generator__title">
+                Настройте генератор,<br/>
+                чтобы получить идею
+            </h2>
+
+            <div class="generator__inner">
+                <!-- левая колонка: контролы -->
+                <div class="generator__controls">
+                    <div class="controls-grid">
+                        <div class="recipient-block">
+                            <h6 class="recipient-header">Для кого</h6>
+                            <div class="recipient-buttons">
+                                <button type="button" class="recipient-btn" data-key="colleagues">Коллеги</button>
+                                <button type="button" class="recipient-btn" data-key="partner">Партнёр</button>
+                                <button type="button" class="recipient-btn" data-key="family">Семья</button>
+                                <button type="button" class="recipient-btn" data-key="friends">Друзья</button>
+                            </div>
+                            <div class="recipient-wrap">
+                                <p class="recipient-preview">...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="control control--difficulty">
+                            <div class="difficulty-grid">
+                                <div class="difficulty-picker">
+                                    <label class="control__legend" for="difficultyThumb">
+                                        Потяните<br>ползунок,<br>чтобы выбрать<br>сложность
+                                    </label>
+                                    <div id="difficultyValue" class="difficulty-value">min</div>
+                                </div>
+
+                                <div class="slider-container">
+                                    <img src="./static/icons/min-range.svg" alt="" class="difficulty-track" />
+                                    <div class="slider-rail" aria-hidden="true"></div>
+
+                                    <button id="difficultyThumb" class="slider-thumb" aria-label="Сложность">
+                                        <img src="./static/icons/swtch.svg" alt="стрелки" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control control--color">
+                            <div class="color-picker">
+                                <img src="./media/image/gradient_paper.png" width="36px" alt="" class="color-picker__bg"/>
+                                
+                                <span class="control__legend">Выберите цвет подарочной бумаги</span>
+                                <button class="color-dot color-dot--tl" data-bg="/public/media/image/blue.png" data-bg-mobile="/public/media/image/blue-mob.png" aria-label="Цвет 1"></button>
+                                <button class="color-dot color-dot--tr" data-bg="/public/media/image/green.png" data-bg-mobile="/public/media/image/green-mob.png" aria-label="Цвет 2"></button>
+                                <button class="color-dot color-dot--bl" data-bg="/public/media/image/purple.png" data-bg-mobile="/public/media/image/purple-mob.png" aria-label="Цвет 3"></button>
+                                <button class="color-dot color-dot--br" data-bg="/public/media/image/azul.png" data-bg-mobile="/public/media/image/azul.png" aria-label="Цвет 4"></button>
+                            </div>
+                        </div>
+                        <div class="control control--hint">
+                            <p class="hint-text">
+                                Кликните на кружочки, чтобы выбрать настроение идеи
+                            </p>
+                        </div>
+                        <div class="control control--mood">
+                        <button class="mood-btn active" data-key="diamond" aria-label="Смешная">
+                            <img src="./static/icons/star.svg" alt="Смешная" />
+                            <span class="label">Смешная</span>
+                        </button>
+
+                        <button class="mood-btn" data-key="star" aria-label="Вдохновляющая">
+                            <img src="./static/icons/abstract.svg" alt="Вдохновляющая" />
+                            <span class="label">Вдохновляющая</span>
+                        </button>
+
+                        <button class="mood-btn" data-key="arrow" aria-label="Полезная">
+                            <img src="./static/icons/arrow.svg" alt="Полезная" />
+                            <span class="label">Полезная</span>
+                        </button>
+                        </div>
+                        <div class="control control--submit">
+                            <button class="action-btn" type="button">Получить идею</button>
+                        </div>
+                    </div>  
+                </div>
+                
+                <!-- правая колонка: идея -->
+                <div class="generator__aside-image">
+                    <a class="share-btn" aria-label="Поделиться">
+                        <img src="./static/icons/share.svg" alt="→"/>
+                        <span class="share-tooltip">
+                            Поделитесь с друзьями<br/>
+                            генератором — пусть тоже<br/>
+                            не ломают голову, что подарить
+                        </span>
+                    </a>
+                    <div class="aside-card"></div>
+                </div>
+            </div> 
+        </section>
+        <section class="gifts" id="gifts">
+            <div class="gifts__head">
+                <h2 class="gifts__title">Подарки для вас</h2>
+                <p class="gifts__lead">
+                    Думать о близких приятно, но важно не забывать о себе. Вы сами можете исполнять свои
+                    желания не хуже Деда Мороза. А мы поможем — ниже вас ждут небольшие подарки.
+                </p>
+            </div>
+
+            <!-- Ряд: купон -->
+            <div class="gifts-row">
+                <article class="gift gift--practicum">
+                    <header class="gift__top">
+                        <img class="gift__brand" src="./static/icons/praktikum.svg" alt="Яндекс Практикум">
+                        <span class="gift__small">Используйте до 31 января 2025 года</span>
+                    </header>
+
+                    <div class="gift__body">
+                        <div class="gift__col gift__col--text">
+                            <h3 class="gift__name">Скидка на курсы Практикума</h3>
+
+                            <p class="gift__text">
+                                Если хотите начать новый год по-новому, попробуйте любой курс Яндекс&nbsp;Практикума бесплатно
+                                и участвуйте в новогоднем адвенте с призами. Ищите его в личном кабинете и выигрывайте мерч,
+                                Яндекс Станции и онлайн-консультации с сотрудниками сервиса.
+                            </p>
+
+                            <p class="gift__hint">
+                                А если уже решились учиться, делайте это со скидкой по промокоду:
+                                −10% на программы английского, −7% на навыки и профессии.
+                            </p>
+                        </div>
+
+                        <div class="gift__col gift__col--side">
+                            <div class="coupon coupon--pill" role="group" aria-label="Промокод">
+                                <span class="coupon__text">NEWYEARGIFT</span>
+                                <span class="coupon__sub gift__deadline">Используйте до 31 января 2025 года <br> Правила использования промокода</span>
+                            </div>
+
+                            <button class="btn btn--white">Выбрать курс</button>
+                        </div>
+                    </div>
+                </article>
+
+                <aside class="gift-art">
+                    <img src="./media/image/art.png" alt="" aria-hidden="true">
+                </aside>
+
+                <!-- ===== РЯД 2: Еда + Лавка ===== -->
+                <div class="gifts-row gifts-row--pair g2-row">
+                    <article class="g2-card g2-card--eda" id="g2Eda">
+                        <header class="g2-card__header">
+                            <img class="g2-card__brand" src="./static/icons/eda.svg" alt="Яндекс Еда">
+                            <div class="g2-card__meta">
+                                <span class="g2-card__small" id="g2Expire">Используйте до 31 января 2025 года</span>
+                                <button class="g2-tip" type="button" aria-label="Условия промокода" data-tip="Промокод дает скидку 50% при первом заказе, но не более 500 рублей." data-tip-pos="top">
+                                    ?
+                                </button>
+                            </div>
+                        </header>
+
+                        <div class="g2-card__body">
+                            <h3 class="g2-card__name">
+                                Промокод<br>на первый<br>заказ
+                            </h3>
+
+                            <p class="g2-card__text">
+                                Еда из ресторанов, лекарства, косметика, цветы и другие вещи, которые пригодятся
+                                в декабрьской суете, со скидкой 50%.
+                            </p>
+
+                            <div class="g2-coupon g2-coupon--wide" role="group" aria-label="Промокод">
+                                <span class="g2-coupon__text">NEWEDA</span>
+                            </div>
+                            <p class="g2-note g2-note--eda">
+                                  Промокод даёт скидку 50% при первом заказе, но не более 500 рублей.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Яндекс Лавка -->
+                    <article class="g2-card g2-card--lavka" id="g2Lavka">
+                        <header class="g2-card__header">
+                            <img class="g2-card__brand" src="./static/icons/lavka.svg" alt="Яндекс Лавка">
+                            <div class="g2-card__meta">
+                                <span class="g2-card__small" id="g2ExpireLavka">Используйте до 31 декабря 2024 года</span>
+                            </div>
+                            <button class="g2-tip g2-tip--outside" id="g2LavkaInfoBtn" type="button" aria-label="Подробнее">
+                                ?
+                            </button>
+                        </header>
+
+                        <div class="g2-card__body">
+                            <h3 class="g2-card__name">
+                                Промокод<br>на первый<br>заказ
+                            </h3>
+
+                            <p class="g2-card__text">
+                                Готовые блюда и продукты с быстрой доставкой и большой скидкой:
+                                40% для Москвы и Санкт-Петербурга и 5% для других городов.
+                            </p>
+
+                            <div class="g2-lavka-coupons">
+                                <div class="g2-coupon" role="group" aria-label="Москва и Санкт-Петербург">
+                                    <span class="g2-coupon__text">PRLVK40</span>
+                                    <span class="g2-coupon__sub">— 40% для Москвы и Санкт-Петербурга</span>
+                                </div>
+
+                                <div class="g2-coupon" role="group" aria-label="Другие города">
+                                    <span class="g2-coupon__text">PRLVK51</span>
+                                    <span class="g2-coupon__sub">— 5% для жителей <u>других городов</u></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="g2-tooltip g2-tooltip--right" id="g2LavkaTipTerms" role="status" aria-hidden="true">
+                            Промокод можно применить при первом заказе — на любые товары, кроме категорий
+                            «Скидки», «Магазин Яндекса», «Товары для взрослых» и детских смесей.
+                            Не суммируется с другими скидками и акциями.
+                        </div>
+
+                        <div class="g2-tooltip g2-tooltip--right" id="g2LavkaTipCities" role="status" aria-hidden="true">
+                            Казань, Ростов-на-Дону, Краснодар, Екатеринбург, Новосибирск, Нижний Новгород,
+                            Пермь, Челябинск, Тула.
+                        </div>
+                    </article>
+                </div>
+            </div> 
+        </section>
+    </main>
+</body>
+</html>
