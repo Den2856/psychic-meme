@@ -63,7 +63,7 @@ window.addEventListener("DOMContentLoaded", () => {
       if (await shouldShowFallback()) {
 
         video.style.display = 'none';
-        fallback.style.display = '';
+        fallback.style.display = 'block';
         if (video.src) { video.removeAttribute('src'); video.load(); }
       } else {
         video.style.display = '';
