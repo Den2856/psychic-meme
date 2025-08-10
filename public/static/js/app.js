@@ -115,7 +115,7 @@ window.addEventListener("DOMContentLoaded", () => {
     recipientBtns[Math.floor(Math.random() * recipientBtns.length)].click();
   }
 
-  /* 2 Логика блока "Сложность" */
+  /* 3 Логика блока "Сложность" */
   (() => {
     const root = document.querySelector('.control--difficulty');
     if (!root) return;
@@ -124,7 +124,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const rail = root.querySelector('.slider-rail') || container;
     const thumb = root.querySelector('#difficultyThumb') || root.querySelector('.slider-thumb');
     const label = root.querySelector('#difficultyValue') || root.querySelector('.difficulty-value');
-    const difficultyTrack = root.querySelector('.difficulty-track'); // сюда мы будем вставлять нужный путь
+    const difficultyTrack = root.querySelector('.difficulty-track');
 
     if (typeof difficultyState === 'string') difficultyState = Math.random() < 0.5 ? 'min' : 'max';
 
@@ -154,7 +154,6 @@ window.addEventListener("DOMContentLoaded", () => {
       if (label) label.textContent = norm;
       if (thumb) thumb.dataset.state = norm;
 
-      // меняем картинку в зависимости от стейта
       if (difficultyTrack) {
         if (difficultyState === 'max') {
           difficultyTrack.src = './static/icons/max-range.svg';
@@ -219,7 +218,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-  /* 3 Логика блока Mood-фильтра */
+  /* 4 Логика блока Mood-фильтра */
   moodBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       moodBtns.forEach(b => b.classList.remove("active"));
@@ -231,7 +230,7 @@ window.addEventListener("DOMContentLoaded", () => {
     moodBtns[Math.floor(Math.random() * moodBtns.length)].click();
   }
 
-  /* 4 Логика цветовых точек */
+  /* 5 Логика цветовых точек */
   colorDots.forEach(dot => {
     dot.addEventListener("click", () => {
       colorDots.forEach(d => d.classList.remove("active"));
@@ -244,7 +243,7 @@ window.addEventListener("DOMContentLoaded", () => {
     colorDots[Math.floor(Math.random() * colorDots.length)].click();
   }
 
-  /* 4.1 Подмена data-bg для мобильных */
+  /* 5.1 Подмена data-bg для мобильных */
   function swapColorDotBg() {
     const isMobile = window.innerWidth <= 320;
     colorDots.forEach(dot => {
@@ -266,7 +265,7 @@ window.addEventListener("DOMContentLoaded", () => {
   swapColorDotBg();
 
 
-  /* 5 Шаблоны ИДЕЙ (48) */
+  /* 6 Шаблоны ИДЕЙ (48) */
   const ideaTemplates = {
     colleagues: {
       diamond: {
@@ -405,7 +404,7 @@ window.addEventListener("DOMContentLoaded", () => {
     return (ideaTemplates[recipient]?.[mood]?.[difficulty] || "Идея не найдена.");
   }
 
-  /* 6 Шаблоны "Как сделать?" (48) */
+  /* 7 Шаблоны "Как сделать?" (48) */
   const howToTemplates = {
     colleagues: {
       diamond: {
@@ -475,7 +474,7 @@ window.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  /* 7 Логика кнопок внутри карточки */
+  /* 8 Логика кнопок внутри карточки */
   function bindHow() {
     const btn = asideCard.querySelector(".how-btn");
     if (!btn) return;
@@ -490,7 +489,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* 8 Рендер ИДЕИ */
+  /* 9 Рендер ИДЕИ */
   function renderIdea() {
     const fullText = getIdea(currentRecipient, currentMood, difficultyState);
     
@@ -517,7 +516,7 @@ window.addEventListener("DOMContentLoaded", () => {
     actionBtn.disabled = true;
   }
 
-  /* 9 Рендер "Как сделать?" */
+  /* 10 Рендер "Как сделать?" */
   function renderHowTo() {
     const howText = getHowTo(currentRecipient, currentMood, difficultyState);
     asideCard.innerHTML = `
@@ -548,7 +547,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   renderIdea();
 
-  /* Локальная функция для рассчёта положения попапов в последнем блоке */
+  /* 11  Локальная функция для рассчёта положения попапов в последнем блоке */
   (() => {
     const tempTips = new Map();
 
