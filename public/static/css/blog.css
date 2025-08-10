@@ -26,7 +26,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* —— HERO —— */
+/* HERO */
 .hero {
   position: relative;
   width: 100%;
@@ -118,7 +118,6 @@ html {
   display: inline-block;
   width: 20px;
   height: 20px;
-  animation: bounce 2s infinite;
 }
 
 .scroll-down img {
@@ -127,7 +126,7 @@ html {
   display: block;
 }
 
-/* ========== Генератор идей ========== */
+/* Генератор идей */
 .generator {
   padding: 4rem 1rem;
   background: #f2f2f2;
@@ -174,7 +173,7 @@ html {
 .control--submit { grid-area: submit; }
 
 
-/* ========== Для кого ========== */
+/*  Для кого  */
 .recipient-block {
   padding: 16px;
   border: 1px solid #1E1E1E;
@@ -205,10 +204,6 @@ html {
   transition: background 0.2s;
 }
 
-.recipient-btn:hover {
-  background: #f0f0f0;
-}
-
 .recipient-btn.active {
   border-style: dashed;
 }
@@ -232,7 +227,7 @@ html {
   padding: 0 10px;
 }
 
-/* ========== Сложность ========== */
+/* Сложность */
 .control.control--difficulty{
   position: relative;
   background: #F1F1F1;
@@ -319,9 +314,17 @@ html {
   cursor: grab;
   box-shadow: 0 2px 0 rgba(0,0,0,.06);
   transition: box-shadow .15s ease;
+
+  &:active{
+    cursor: grabbing;
+  }
 }
-.slider-thumb:active{ cursor: grabbing; }
-.slider-thumb img{ width: 18px; height: 18px; pointer-events: none; }
+
+.slider-thumb img{ 
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
 
 .control--color .color-picker {
   position: relative;
@@ -379,7 +382,7 @@ html {
   color: #1E1E1E
 }
 
-/* ---- mood-selector ---- */
+/* mood-selector  */
 .control--mood{
   display: flex;
   gap: 9.25px;
@@ -444,11 +447,6 @@ html {
   z-index: 1;
 }
 
-.mood-btn.active img,
-.mood-btn.active .label {
-  pointer-events: none;
-}
-
 .action-btn {
   width: 100%;
   padding: 1rem 0;
@@ -459,11 +457,20 @@ html {
   font-size: 1.125rem;
   cursor: pointer;
   transition: background .2s;
-}
+  
+  &:disabled{
+    background-color: #D1D1D1;
+    color: #1E1E1E;
+  }
 
-.action-btn:disabled{
-  background-color: #D1D1D1;
-  color: #1E1E1E; 
+  &:hover{
+    background: #333;
+  }
+
+  &:disabled:hover{
+    background: #D1D1D1;
+  }
+
 }
 
 .generator__aside-image {
@@ -584,13 +591,11 @@ html {
   font-size: 0.875rem;
   cursor: pointer;
   transition: background .2s;
+
+  &:hover{
+    background: #333;
+  }
 }
-.how-btn:hover {
-  background: #333;
-}
-
-
-
 
 /* gift header */
 .gifts {
@@ -615,7 +620,7 @@ html {
   color: #1E1E1E;
 }
 
-/*gift pract*/
+/* gift купон на первой строке грида */
 
 .gifts-row{
   max-width: 1010px;
@@ -716,7 +721,7 @@ html {
   display: flex;
 }
 
-/* ===== g-2 ===== */
+/* g-2 (grid из двух промокодов) */
 
 .g2-row{
   display: grid;

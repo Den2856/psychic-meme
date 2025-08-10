@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
+  /* 1 локальная функция для логики отображения видео */
   (() => {
     const video = document.getElementById('heroVideo');
     const fallback = document.getElementById('heroFallback');
@@ -22,6 +23,21 @@ window.addEventListener("DOMContentLoaded", () => {
       );
     }
 
+    async function shouldShowFallback() {
+      const lowData = (window.innerWidth <= 470) && (navigator.connection?.saveData === true);
+
+      let lowBattery = false;
+
+      try {
+        if ('getBattery' in navigator) {
+          const b = await navigator.getBattery();
+          lowBattery = (b && !b.charging && b.level <= 0.2);
+        }
+      } catch {}
+
+      return lowData || lowBattery;
+    }
+
     function showFallback() {
       video.style.display = 'none';
       fallback.style.display = 'block';
@@ -43,15 +59,19 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    function start() {
-      if (isLowDataMode()) {
-        showFallback();
+    async function start() {
+      if (await shouldShowFallback()) {
+
+        video.style.display = 'none';
+        fallback.style.display = '';
+        if (video.src) { video.removeAttribute('src'); video.load(); }
       } else {
         video.style.display = '';
         fallback.style.display = 'none';
         applySrc(pick());
       }
     }
+
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', start, { once: true });
@@ -65,7 +85,6 @@ window.addEventListener("DOMContentLoaded", () => {
       t = setTimeout(start, 150);
     });
   })();
-
 
 
   const recipientBtns = Array.from(document.querySelectorAll('.recipient-btn'));
@@ -91,7 +110,7 @@ window.addEventListener("DOMContentLoaded", () => {
     friends: "Анализируем весёлые воспоминания!"
   };
 
-  // === 2) Логика блока "Для кого" ===
+  /* 2 Логика блока "Для кого" */
   recipientBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       recipientBtns.forEach(b => b.classList.remove("active"));
@@ -106,6 +125,7 @@ window.addEventListener("DOMContentLoaded", () => {
     recipientBtns[Math.floor(Math.random() * recipientBtns.length)].click();
   }
 
+  /* 2 Логика блока "Сложность" */
   (() => {
     const root = document.querySelector('.control--difficulty');
     if (!root) return;
@@ -209,7 +229,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-  // === 4) Логика Mood-фильтра ===
+  /* 3 Логика блока Mood-фильтра */
   moodBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       moodBtns.forEach(b => b.classList.remove("active"));
@@ -221,7 +241,7 @@ window.addEventListener("DOMContentLoaded", () => {
     moodBtns[Math.floor(Math.random() * moodBtns.length)].click();
   }
 
-  // === 5) Логика цветовых точек ===
+  /* 4 Логика цветовых точек */
   colorDots.forEach(dot => {
     dot.addEventListener("click", () => {
       colorDots.forEach(d => d.classList.remove("active"));
@@ -234,7 +254,7 @@ window.addEventListener("DOMContentLoaded", () => {
     colorDots[Math.floor(Math.random() * colorDots.length)].click();
   }
 
-  // === 6) Подмена data-bg для мобильных (≤320px) ===
+  /* 4.1 Подмена data-bg для мобильных */
   function swapColorDotBg() {
     const isMobile = window.innerWidth <= 320;
     colorDots.forEach(dot => {
@@ -256,7 +276,7 @@ window.addEventListener("DOMContentLoaded", () => {
   swapColorDotBg();
 
 
-  // === 6) Шаблоны ИДЕЙ (48) ===
+  /* 5 Шаблоны ИДЕЙ (48) */
   const ideaTemplates = {
     colleagues: {
       diamond: {
@@ -395,7 +415,7 @@ window.addEventListener("DOMContentLoaded", () => {
     return (ideaTemplates[recipient]?.[mood]?.[difficulty] || "Идея не найдена.");
   }
 
-  // === 7) Шаблоны "Как сделать?" (48) ===
+  /* 6 Шаблоны "Как сделать?" (48) */
   const howToTemplates = {
     colleagues: {
       diamond: {
@@ -465,7 +485,7 @@ window.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // === 8) Bind-связки для кнопок внутри карточки ===
+  /* 7 Логика кнопок внутри карточки */
   function bindHow() {
     const btn = asideCard.querySelector(".how-btn");
     if (!btn) return;
@@ -480,7 +500,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === 9) Рендер ИДЕИ ===
+  /* 8 Рендер ИДЕИ */
   function renderIdea() {
     const fullText = getIdea(currentRecipient, currentMood, difficultyState);
     
@@ -488,7 +508,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const title = firstLine || 'Идея';
     const body  = restLines.join(' ').trim();
 
-    // Собираем HTML
     lastIdeaHTML = `
       <h3 class="aside-card__title">${title}</h3>
       <p class="aside-card__text">${body}</p>
@@ -508,7 +527,7 @@ window.addEventListener("DOMContentLoaded", () => {
     actionBtn.disabled = true;
   }
 
-  // === 10) Рендер "Как сделать?" ===
+  /* 9 Рендер "Как сделать?" */
   function renderHowTo() {
     const howText = getHowTo(currentRecipient, currentMood, difficultyState);
     asideCard.innerHTML = `
@@ -533,13 +552,13 @@ window.addEventListener("DOMContentLoaded", () => {
     el.addEventListener('click', resetActionBtn);
   });
 
-  // === 11) Привязываем кнопку "Получить идею" ===
   if (actionBtn) {
     actionBtn.addEventListener("click", renderIdea);
   }
 
   renderIdea();
 
+  /* Локальная функция для рассчёта положения попапов в последнем блоке */
   (() => {
     const tempTips = new Map();
 
