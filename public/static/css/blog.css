@@ -177,7 +177,7 @@ html {
 .recipient-block {
   padding: 16px;
   border: 1px solid #1E1E1E;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #F1F1F1;
 }
 
@@ -234,7 +234,7 @@ html {
   width: 196px;
   height: 155px;
   border: 1px solid #1E1E1E;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 12px;
   overflow: hidden;
 }
@@ -329,7 +329,7 @@ html {
 .control--color .color-picker {
   position: relative;
   height: 114px;
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -508,7 +508,7 @@ html {
   transition: opacity .2s ease;
   background: #FFF;
   border: 2px dashed #000;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: .75rem 1rem;
   font-size: .875rem;
   line-height: 1.4;
@@ -539,7 +539,7 @@ html {
   align-self: center;
   width: 90%;
   background: #FFFFFF;
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   display: flex;
@@ -634,7 +634,7 @@ html {
 .gift{
   background:#2B2B2B;
   color:#FFF;
-  border-radius: 16px;
+  border-radius: 8px;
   height: fit-content;
   padding: 20px 24px 24px;
 }
@@ -683,7 +683,7 @@ html {
 
 .coupon{
   border: 2px dashed #FFF;
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 18px;
   display:grid;
   place-items: center;
@@ -691,7 +691,7 @@ html {
 }
 .coupon--pill{
   max-width: 260px;
-  border-radius: 20px;
+  border-radius: 8px;
 }
 .coupon__text{
   font-family: tenor-h;
@@ -701,7 +701,7 @@ html {
 }
 
 .btn{
-  border-radius: 16px;
+  border-radius: 8px;
   min-width: 260px;
   max-height: 67px;
   padding: 18px 16px;
@@ -716,7 +716,7 @@ html {
 }
 
 .gift-art{
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   display: flex;
 }
@@ -735,7 +735,7 @@ html {
   position: relative;
   background: #fff;
   border: 1px solid #1E1E1E;
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 18px;
   height: fit-content;
   overflow: visible;
@@ -787,7 +787,7 @@ html {
   align-items: center;
   gap: 10px;
   border: 2px dashed #1E1E1E;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 14px 18px;
   background: #fff;
 }
@@ -841,7 +841,7 @@ html {
   background: #fff;
   color: #1E1E1E;
   border: 1px dashed #1E1E1E;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 12px 14px;
   font-size: 14px;
   line-height: 1.35;
@@ -872,7 +872,7 @@ html {
   margin-top: 10px;
   padding: 10px 12px;
   border: 1px dashed #1E1E1E;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 13px;
   line-height: 1.35;
   color: #1E1E1E;
