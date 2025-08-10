@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function showFallback() {
       video.style.display = 'none';
-      fallback.style.display = '';
+      fallback.style.display = 'block';
     }
 
     function applySrc(url) {
