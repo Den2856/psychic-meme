@@ -23,9 +23,19 @@ window.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    function showFallback() {
-      video.style.display = 'none';
-      fallback.style.display = '';
+    async function shouldShowFallback() {
+      const lowData = (window.innerWidth <= 470) && (navigator.connection?.saveData === true);
+
+      let lowBattery = false;
+
+      try {
+        if ('getBattery' in navigator) {
+          const b = await navigator.getBattery();
+          lowBattery = (b && !b.charging && b.level <= 0.15);
+        }
+      } catch {}
+
+      return lowData || lowBattery;
     }
 
     function applySrc(url) {
@@ -44,15 +54,19 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    function start() {
-      if (isLowDataMode()) {
-        showFallback();
+    async function start() {
+      if (await shouldShowFallback()) {
+
+        video.style.display = 'none';
+        fallback.style.display = 'block';
+        if (video.src) { video.removeAttribute('src'); video.load(); }
       } else {
-        video.style.display = '';
+        video.style.display = 'block';
         fallback.style.display = 'none';
         applySrc(pick());
       }
     }
+
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', start, { once: true });
@@ -66,7 +80,6 @@ window.addEventListener("DOMContentLoaded", () => {
       t = setTimeout(start, 150);
     });
   })();
-
 
 
   const recipientBtns = Array.from(document.querySelectorAll('.recipient-btn'));
