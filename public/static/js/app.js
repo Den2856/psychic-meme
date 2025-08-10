@@ -23,24 +23,9 @@ window.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    async function shouldShowFallback() {
-      const lowData = (window.innerWidth <= 470) && (navigator.connection?.saveData === true);
-
-      let lowBattery = false;
-
-      try {
-        if ('getBattery' in navigator) {
-          const b = await navigator.getBattery();
-          lowBattery = (b && !b.charging && b.level <= 0.2);
-        }
-      } catch {}
-
-      return lowData || lowBattery;
-    }
-
     function showFallback() {
       video.style.display = 'none';
-      fallback.style.display = 'block';
+      fallback.style.display = '';
     }
 
     function applySrc(url) {
@@ -59,19 +44,15 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    async function start() {
-      if (await shouldShowFallback()) {
-
-        video.style.display = 'none';
-        fallback.style.display = 'block';
-        if (video.src) { video.removeAttribute('src'); video.load(); }
+    function start() {
+      if (isLowDataMode()) {
+        showFallback();
       } else {
-        video.style.display = 'block';
+        video.style.display = '';
         fallback.style.display = 'none';
         applySrc(pick());
       }
     }
-
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', start, { once: true });
@@ -85,6 +66,7 @@ window.addEventListener("DOMContentLoaded", () => {
       t = setTimeout(start, 150);
     });
   })();
+
 
 
   const recipientBtns = Array.from(document.querySelectorAll('.recipient-btn'));
