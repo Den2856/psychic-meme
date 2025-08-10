@@ -1,7 +1,8 @@
 window.addEventListener("DOMContentLoaded", () => {
   (() => {
     const video = document.getElementById('heroVideo');
-    if (!video) return;
+    const fallback = document.getElementById('heroFallback');
+    if (!video || !fallback) return;
 
     const SRC_DESKTOP = './media/vids/hero_vid.mp4';
     const SRC_MOBILE  = './media/vids/hero_vid_mob.mp4';
@@ -12,6 +13,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
     let currentSrc = null;
     const pick = () => (window.innerWidth <= 768 ? SRC_MOBILE : SRC_DESKTOP);
+
+    function isLowDataMode() {
+      return (
+        window.innerWidth <= 470 &&
+        (navigator.connection?.saveData ||
+        window.matchMedia('(prefers-reduced-data: reduce)').matches)
+      );
+    }
+
+    function showFallback() {
+      video.style.display = 'none';
+      fallback.style.display = '';
+    }
 
     function applySrc(url) {
       if (currentSrc === url) return;
@@ -30,7 +44,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     function start() {
-      applySrc(pick());
+      if (isLowDataMode()) {
+        showFallback();
+      } else {
+        video.style.display = '';
+        fallback.style.display = 'none';
+        applySrc(pick());
+      }
     }
 
     if (document.readyState === 'loading') {
@@ -42,9 +62,10 @@ window.addEventListener("DOMContentLoaded", () => {
     let t;
     window.addEventListener('resize', () => {
       clearTimeout(t);
-      t = setTimeout(() => applySrc(pick()), 150);
+      t = setTimeout(start, 150);
     });
   })();
+
 
 
   const recipientBtns = Array.from(document.querySelectorAll('.recipient-btn'));
@@ -401,8 +422,8 @@ window.addEventListener("DOMContentLoaded", () => {
         max: "Если идей не хватает, обратитесь к YandexGPT. Расскажите ей, чем увлекается друг, что ему нравится и что хочется попробовать. Нейросеть предложит креативные идеи, которые можно адаптировать под себя."
       },
       arrow: {
-        min: "Создайте телеграм-канал для друзей, куда каждый может писать о том, что его бы порадовало: например, на день рождения хочется приставку, а сегодня — пиццу, чтобы скрасить грустный вечер. Увидите такой пост — заказывайте такси в Яндекс Go и отправляйтесь по нужному адресу (не забыв заехать в пиццерию).",
-        max: "Взрослая жизнь — это когда с друзьями о встрече нужно договариваться минимум за месяц, чтобы все нашли силы и время. Предлагаем пойти дальше и сгенерировать календарь поводов на целый год вперёд (а ещё наказания за неявку)."
+        min: "Создайте закрытый телеграм-канал, пригласите всех друзей, назначьте их администраторами и откройте комментарии. Такой виш-лист станет не только кладезью мыслей, как порадовать близких на Новый год и другие праздники, но и местом смешных обсуждений и генерации новых идей.",
+        max: "Вспомните все памятные даты: от годовщины дружбы до самой запоминающейся вечеринки. Занесите их календарь и поделитесь доступом. Воспользуйтесь YandexGPT и попросите покреативить с наказаниями, чтобы друзья 100 раз подумали, прежде чем придумывать новые отмазки."
       }
     },
 
